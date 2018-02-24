@@ -8,16 +8,17 @@ const orders = [
 
 main = () => {
   printHeaderFooter(
-    "Map (LINQ Select Equivalent) DEMO - Print Order Quantities",
+    "Map (LINQ 'Select' Equivalent) DEMO - Print Order Quantities",
     () => mapDemo(orders)
   );
   printHeaderFooter(
-    "Reduce (LINQ Aggregate Equivalent) DEMO - Sum Quantities",
+    "Reduce (LINQ 'Aggregate' Equivalent) DEMO - Sum Quantities",
     () => reduceDemo(orders)
   );
-  //   printHeaderFooter("Filter DEMO - Order with Quantity over 30", () =>
-  //     filterDemo(orders)
-  //   );
+  printHeaderFooter(
+    "Filter (LINQ 'Where' Equivalent) DEMO - Order with Quantity over 30",
+    () => filterDemo(orders)
+  );
   //   printHeaderFooter("Sort DEMO1 - Order by Quantities in Ascending Order", () =>
   //     sortByAscendingDemo(orders)
   //   );
@@ -26,6 +27,11 @@ main = () => {
   //     () => sortByDescendingDemo(orders)
   //   );
 };
+
+function filterDemo(orders) {
+  const ordersWithQuantityOver30 = orders.filter(order => order.quantity > 30);
+  printOrders(ordersWithQuantityOver30);
+}
 
 function reduceDemo(orders) {
   const initialQuantity = 0;
