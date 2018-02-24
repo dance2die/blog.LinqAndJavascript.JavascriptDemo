@@ -30,22 +30,33 @@ main = () => {
 };
 
 function sortByDescendingDemo(orders) {
+  // Switching o1 & o2 around has the same effect has sorting in descending order
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
   var oderedOrders = orders.sort((o1, o2) => o2.quantity - o1.quantity);
   printOrders(oderedOrders);
 }
 
 function sortByAscendingDemo(orders) {
+  // Sorting works by comparing two values in a callback.
+  // When o1.quantity < 0, then o1 comes before o2.
+  // When o2.quantity < 0, then o2 comes before o1.
+  // When o1.quantity === o2.quantity then no change is needed
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
   var oderedOrders = orders.sort((o1, o2) => o1.quantity - o2.quantity);
   printOrders(oderedOrders);
 }
 
 function filterDemo(orders) {
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
   const ordersWithQuantityOver30 = orders.filter(order => order.quantity > 30);
   printOrders(ordersWithQuantityOver30);
 }
 
 function reduceDemo(orders) {
   const initialQuantity = 0;
+  // NOTE: initialQuantity/Value is passed after the callback in Javascript
+  // while in LINQ, it's passed as the first argument.
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
   const totalQuantities = orders.reduce(
     (sum, order) => sum + order.quantity,
     initialQuantity
@@ -54,6 +65,7 @@ function reduceDemo(orders) {
 }
 
 function mapDemo(orders) {
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
   const quantities = orders.map(order => order.quantity);
   quantities.forEach(quantity => console.log(`Quantity: ${quantity}`));
 }
