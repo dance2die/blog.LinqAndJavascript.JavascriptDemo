@@ -23,20 +23,20 @@ main = () => {
     "Sort (LINQ 'OrderBy' Equivalent) DEMO1 - Order by Quantities in Ascending Order",
     () => sortByAscendingDemo(orders)
   );
-    printHeaderFooter(
-      "Sort (LINQ 'OrderByDescending' Equivalent) DEMO2 - Order by Quantities in Descending Order",
-      () => sortByDescendingDemo(orders)
-    );
+  printHeaderFooter(
+    "Sort (LINQ 'OrderByDescending' Equivalent) DEMO2 - Order by Quantities in Descending Order",
+    () => sortByDescendingDemo(orders)
+  );
 };
 
 function sortByDescendingDemo(orders) {
-    var oderedOrders = orders.sort((o1, o2) => o2.quantity - o1.quantity);
-    printOrders(oderedOrders);
+  var oderedOrders = orders.sort((o1, o2) => o2.quantity - o1.quantity);
+  printOrders(oderedOrders);
 }
 
 function sortByAscendingDemo(orders) {
-    var oderedOrders = orders.sort((o1, o2) => o1.quantity - o2.quantity);
-    printOrders(oderedOrders);
+  var oderedOrders = orders.sort((o1, o2) => o1.quantity - o2.quantity);
+  printOrders(oderedOrders);
 }
 
 function filterDemo(orders) {
