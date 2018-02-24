@@ -7,23 +7,38 @@ const orders = [
 ];
 
 main = () => {
-  printHeaderFooter("Map (LINQ Select Equivalent) DEMO - Print Order Quantities", () => mapDemo(orders));
-//   printHeaderFooter("Reduce DEMO - Sum Quantities", () => reduceDemo(orders));
-//   printHeaderFooter("Filter DEMO - Order with Quantity over 30", () =>
-//     filterDemo(orders)
-//   );
-//   printHeaderFooter("Sort DEMO1 - Order by Quantities in Ascending Order", () =>
-//     sortByAscendingDemo(orders)
-//   );
-//   printHeaderFooter(
-//     "Sort DEMO2 - Order by Quantities in Descending Order",
-//     () => sortByDescendingDemo(orders)
-//   );
+  printHeaderFooter(
+    "Map (LINQ Select Equivalent) DEMO - Print Order Quantities",
+    () => mapDemo(orders)
+  );
+  printHeaderFooter(
+    "Reduce (LINQ Aggregate Equivalent) DEMO - Sum Quantities",
+    () => reduceDemo(orders)
+  );
+  //   printHeaderFooter("Filter DEMO - Order with Quantity over 30", () =>
+  //     filterDemo(orders)
+  //   );
+  //   printHeaderFooter("Sort DEMO1 - Order by Quantities in Ascending Order", () =>
+  //     sortByAscendingDemo(orders)
+  //   );
+  //   printHeaderFooter(
+  //     "Sort DEMO2 - Order by Quantities in Descending Order",
+  //     () => sortByDescendingDemo(orders)
+  //   );
 };
 
+function reduceDemo(orders) {
+  const initialQuantity = 0;
+  const totalQuantities = orders.reduce(
+    (sum, order) => sum + order.quantity,
+    initialQuantity
+  );
+  console.log(`Total Quantities: ${totalQuantities}`);
+}
+
 function mapDemo(orders) {
-    const quantities = orders.map(order => order.quantity);
-    quantities.forEach(quantity => console.log(`Quantity: ${quantity}`));
+  const quantities = orders.map(order => order.quantity);
+  quantities.forEach(quantity => console.log(`Quantity: ${quantity}`));
 }
 
 function printHeaderFooter(title, callback) {
@@ -41,10 +56,4 @@ function printOrders(orders) {
   });
 }
 
-
 main();
-
-
-
-
-
