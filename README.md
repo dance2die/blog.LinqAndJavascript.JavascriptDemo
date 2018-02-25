@@ -1,4 +1,7 @@
-# How to run the source code
+# JavaScript source code for 
+[the blog entry](https://www.slightedgecoder.com/2018/02/24/approximate-equivalent-linq-methods-javascript/)
+
+## How to run the source code
 ### NOTE: Requires [NodeJS](https://nodejs.org/en/).
 Clone the source code
 
