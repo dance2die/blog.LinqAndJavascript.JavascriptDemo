@@ -50,7 +50,24 @@ main = () => {
     "Concat (LINQ 'Concat' Equivalent) DEMO - Concatenate the first and the last orders",
     () => concatDemo(orders)
   );
+
+  printHeaderFooter(
+    "Spread Operator (LINQ 'SelectMany' Equivalent) DEMO - Concatenate the first and the last orders",
+    () => spreadDemo(orders)
+  );
 };
+
+/**
+ * Concatenate the first and the last orders to emulate "SelectMany" in LINQ
+ * WARNING ⚠️: Super contrived example again...
+ */
+function spreadDemo(orders) {
+  const firstOrder = [orders[0]];
+  const lastOrder = [[...orders].pop()];
+  // spread operator "..." on each array does the same thing as "SelectMany" in LINQ.
+  const firstAndLastOrders = [...firstOrder, ...lastOrder];
+  printOrders(firstAndLastOrders);
+}
 
 /**
  * Concatenate the first and the last orders
