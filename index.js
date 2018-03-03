@@ -38,27 +38,34 @@ main = () => {
 
   printHeaderFooter(
     "Filter (LINQ 'Distinct' Equivalent) DEMO - Get Distinct Order Quantities",
-    () => distinctDemo(orders)
+    () => distinctDemo1(orders)
+  );
+
+  printHeaderFooter(
+    "Filter (LINQ 'Distinct' Equivalent) DEMO2 - Get Distinct Order Quantities using \"Set\"",
+    () => distinctDemo2(orders)
   );
 };
 
-function distinctDemo(orders) {
-  const distinctQuantityOrders1 = orders
+/**
+ *  An alternate method of implementing Distinct() LINQ method using new "Set" introduced in ES6 and the spread operator
+ */
+function distinctDemo2(orders) {
+  const distinctQuantityOrders = [... new Set(orders.map(order => order.quantity))];
+  distinctQuantityOrders.forEach(quantity =>
+    WriteLine(`Distinct Quantity: ${quantity}`)
+  );
+}
+
+function distinctDemo1(orders) {
+  const distinctQuantityOrders = orders
     .map(order => order.quantity)
     // Refer to StackOverflow answer on https://stackoverflow.com/a/14438954/4035
     .filter((quantity, index, self) => self.indexOf(quantity) === index);
 
-  distinctQuantityOrders1.forEach(quantity =>
+  distinctQuantityOrders.forEach(quantity =>
     WriteLine(`Distinct Quantity: ${quantity}`)
   );
-
-  //
-  // ----- Alternate method using new "Set" introduced in ES6 and the spread operator -----
-  ///
-  // const distinctQuantityOrders2 = [... new Set(orders.map(order => order.quantity))];
-  // distinctQuantityOrders2.forEach(quantity =>
-  //   WriteLine(`Distinct Quantity: ${quantity}`)
-  // );
 }
 
 function someDemo(orders) {
