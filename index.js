@@ -35,13 +35,43 @@ main = () => {
     "Some (LINQ 'Any' Equivalent) DEMO - Check if there are *any* orders with certain quantities",
     () => someDemo(orders)
   );
+
+  printHeaderFooter(
+    "Filter (LINQ 'Distinct' Equivalent) DEMO - Get Distinct Order Quantities",
+    () => distinctDemo(orders)
+  );
 };
 
-function someDemo(orders) {
-  const ordersMoreThanEqualToQuantity30Exists = orders.some(order => order.quantity >= 30);
-  WriteLine(`Are there orders with quantity great than and equal to 30? ${ordersMoreThanEqualToQuantity30Exists}`);
+function distinctDemo(orders) {
+  const distinctQuantityOrders1 = orders
+    .map(order => order.quantity)
+    // Refer to StackOverflow answer on https://stackoverflow.com/a/14438954/4035
+    .filter((quantity, index, self) => self.indexOf(quantity) === index);
 
-  const ordersBeforeYear2018 = orders.some(order => order.orderDate.getFullYear() < 2018);
+  distinctQuantityOrders1.forEach(quantity =>
+    WriteLine(`Distinct Quantity: ${quantity}`)
+  );
+
+  //
+  // ----- Alternate method using new "Set" introduced in ES6 and the spread operator -----
+  ///
+  // const distinctQuantityOrders2 = [... new Set(orders.map(order => order.quantity))];
+  // distinctQuantityOrders2.forEach(quantity =>
+  //   WriteLine(`Distinct Quantity: ${quantity}`)
+  // );
+}
+
+function someDemo(orders) {
+  const ordersMoreThanEqualToQuantity30Exists = orders.some(
+    order => order.quantity >= 30
+  );
+  WriteLine(
+    `Are there orders with quantity great than and equal to 30? ${ordersMoreThanEqualToQuantity30Exists}`
+  );
+
+  const ordersBeforeYear2018 = orders.some(
+    order => order.orderDate.getFullYear() < 2018
+  );
   WriteLine(`Are there orders ordered before 2018? ${ordersBeforeYear2018}`);
 
   const ordersWithIDGreaterThan100 = orders.some(order => order.id > 100);
