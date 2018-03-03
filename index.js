@@ -1,3 +1,5 @@
+const WriteLine = console.log;
+
 const orders = [
   { id: 1, quantity: 40, orderDate: new Date(2018, 1, 1, 1, 1, 1) },
   { id: 2, quantity: 20, orderDate: new Date(2018, 2, 2, 2, 2, 2) },
@@ -27,7 +29,24 @@ main = () => {
     "Sort (LINQ 'OrderByDescending' Equivalent) DEMO2 - Order by Quantities in Descending Order",
     () => sortByDescendingDemo(orders)
   );
+
+  // Part 2 Demos start here.
+  printHeaderFooter(
+    "Some (LINQ 'Any' Equivalent) DEMO - Check if there are *any* orders with certain quantities",
+    () => someDemo(orders)
+  );
 };
+
+function someDemo(orders) {
+  const ordersMoreThanEqualToQuantity30Exists = orders.some(order => order.quantity >= 30);
+  WriteLine(`Are there orders with quantity great than and equal to 30? ${ordersMoreThanEqualToQuantity30Exists}`);
+
+  const ordersBeforeYear2018 = orders.some(order => order.orderDate.getFullYear() < 2018);
+  WriteLine(`Are there orders ordered before 2018? ${ordersBeforeYear2018}`);
+
+  const ordersWithIDGreaterThan100 = orders.some(order => order.id > 100);
+  WriteLine(`Do we have more than 100 Orders? ${ordersWithIDGreaterThan100}`);
+}
 
 function sortByDescendingDemo(orders) {
   // Switching o1 & o2 around has the same effect has sorting in descending order
@@ -67,19 +86,19 @@ function reduceDemo(orders) {
 function mapDemo(orders) {
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
   const quantities = orders.map(order => order.quantity);
-  quantities.forEach(quantity => console.log(`Quantity: ${quantity}`));
+  quantities.forEach(quantity => WriteLine(`Quantity: ${quantity}`));
 }
 
 function printHeaderFooter(title, callback) {
   const divider = "=".repeat(20);
-  console.log(`${divider}  ${title}  ${divider}`);
+  WriteLine(`${divider}  ${title}  ${divider}`);
   callback();
 }
 
 function printOrders(orders) {
   orders.forEach(order => {
     const { id, quantity, orderDate } = order;
-    console.log(
+    WriteLine(
       `Order ID: ${id}, Quantity: ${quantity}, Order Date: ${orderDate}`
     );
   });
