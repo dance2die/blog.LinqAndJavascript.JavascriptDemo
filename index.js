@@ -45,13 +45,32 @@ main = () => {
     "Filter (LINQ 'Distinct' Equivalent) DEMO2 - Get Distinct Order Quantities using \"Set\"",
     () => distinctDemo2(orders)
   );
+
+  printHeaderFooter(
+    "Concat (LINQ 'Concat' Equivalent) DEMO - Concatenate the first and the last orders",
+    () => concatDemo(orders)
+  );
 };
+
+/**
+ * Concatenate the first and the last orders
+ * WARNING ⚠️: Super contrived example
+ */
+function concatDemo(orders) {
+  const firstOrder = [orders[0]];
+  const lastOrder = [[...orders].pop()];
+  const firstAndLastOrders = firstOrder.concat(lastOrder);
+
+  printOrders(firstAndLastOrders);
+}
 
 /**
  *  An alternate method of implementing Distinct() LINQ method using new "Set" introduced in ES6 and the spread operator
  */
 function distinctDemo2(orders) {
-  const distinctQuantityOrders = [... new Set(orders.map(order => order.quantity))];
+  const distinctQuantityOrders = [
+    ...new Set(orders.map(order => order.quantity))
+  ];
   distinctQuantityOrders.forEach(quantity =>
     WriteLine(`Distinct Quantity: ${quantity}`)
   );
@@ -88,7 +107,7 @@ function someDemo(orders) {
 function sortByDescendingDemo(orders) {
   // Switching o1 & o2 around has the same effect has sorting in descending order
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-  var oderedOrders = orders.sort((o1, o2) => o2.quantity - o1.quantity);
+  var oderedOrders = orders.slice().sort((o1, o2) => o2.quantity - o1.quantity);
   printOrders(oderedOrders);
 }
 
@@ -98,7 +117,7 @@ function sortByAscendingDemo(orders) {
   // When o2.quantity < 0, then o2 comes before o1.
   // When o1.quantity === o2.quantity then no change is needed
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-  var oderedOrders = orders.sort((o1, o2) => o1.quantity - o2.quantity);
+  var oderedOrders = orders.slice().sort((o1, o2) => o1.quantity - o2.quantity);
   printOrders(oderedOrders);
 }
 
