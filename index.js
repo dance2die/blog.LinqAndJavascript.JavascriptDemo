@@ -55,7 +55,27 @@ main = () => {
     "Spread Operator (LINQ 'SelectMany' Equivalent) DEMO - Concatenate the first and the last orders",
     () => spreadDemo(orders)
   );
+  
+  // Part 3 Demos start here.
+  printHeaderFooter(
+    "Reverse (LINQ 'Reverse' Equivalent) DEMO - Reverse current data source elements",
+    () => reverseDemo(orders)
+  );
+  
 };
+
+function reverseDemo(orders) {
+  const mid = orders.length / 2;
+  const leftHalf = orders.slice(0, mid);
+  const rightHalf = orders.slice(mid);
+  const combinedOrders = rightHalf.concat(leftHalf);
+
+  const indentBy = 4;
+  printHeaderFooter("Reversing from this list", () => printOrders(combinedOrders, indentBy), indentBy, '*');
+
+  const reversedOrders = combinedOrders.reverse();
+  printOrders(reversedOrders);
+}
 
 /**
  * Concatenate the first and the last orders to emulate "SelectMany" in LINQ
@@ -162,17 +182,19 @@ function mapDemo(orders) {
   quantities.forEach(quantity => WriteLine(`Quantity: ${quantity}`));
 }
 
-function printHeaderFooter(title, callback) {
+function printHeaderFooter(title, callback, indentBy = 0, dividerCharacter = '=') {
   const divider = "=".repeat(20);
-  WriteLine(`${divider}  ${title}  ${divider}`);
+  const indentation = ' '.repeat(indentBy);
+  WriteLine(`${indentation}${divider}  ${title}  ${divider}`);
   callback();
 }
 
-function printOrders(orders) {
+function printOrders(orders, indentBy = 0) {
   orders.forEach(order => {
     const { id, quantity, orderDate } = order;
+    const indentation = ' '.repeat(indentBy);
     WriteLine(
-      `Order ID: ${id}, Quantity: ${quantity}, Order Date: ${orderDate}`
+      `${indentation}Order ID: ${id}, Quantity: ${quantity}, Order Date: ${orderDate}`
     );
   });
 }
