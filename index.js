@@ -62,7 +62,21 @@ main = () => {
     () => reverseDemo(orders)
   );
 
+  printHeaderFooter(
+    "Map (LINQ 'Zip' Equivalent) DEMO - Appending Order Numbers in Text",
+    () => zipDemo(orders)
+  );
 };
+
+function zipDemo(orders) {
+  const orderNumbersInText = ["One", "Two", "Three", "Four", "Five"];
+  orders
+    .map(
+      (order, index) =>
+        `Quantity of Order ${orderNumbersInText[index]}: ${order.quantity}`
+    )
+    .forEach(sentence => WriteLine(sentence));
+}
 
 function reverseDemo(orders) {
   const mid = orders.length / 2;
