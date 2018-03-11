@@ -66,17 +66,37 @@ main = () => {
     "Map (LINQ 'Zip' Equivalent) DEMO - Appending Order Numbers in Text",
     () => zipDemo(orders)
   );
+
+  printHeaderFooter(
+    "Math.min/max (LINQ 'Min/Max' Equivalent) DEMO - Appending Order Numbers in Text",
+    () => minMaxDemo(orders)
+  );
 };
+
+function minMaxDemo(orders) {
+  const minimumQuantity = Math.min(...orders.map(order => order.quantity));
+  const maximumQuantity = Math.max(...orders.map(order => order.quantity));
+
+  /*
+  ~ Or ~
+  you can declare a global prototypes for "min/max" and use it just like in LINQ.
+    Array.prototype.min = function(propertySelector) { return Math.min(...this.map(propertySelector)) };
+    Array.prototype.max = function(propertySelector) { return Math.max(...this.map(propertySelector)) };
+    const minimumQuantity = orders.min(order => order.quantity);
+    const maximumQuantity = orders.max(order => order.quantity);
+  */
+
+  WriteLine(`Minimum Quantity: ${minimumQuantity}`);
+  WriteLine(`Maximum Quantity: ${maximumQuantity}`);
+}
 
 function zipDemo(orders) {
   const orderNumbersInText = ["One", "Two", "Three", "Four", "Five"];
   orders
-    .map(
-      (order, index) => {
-        const text = orderNumbersInText[index];
-        return `Quantity of Order ${text}: ${order.quantity}`
-      }
-    )
+    .map((order, index) => {
+      const text = orderNumbersInText[index];
+      return `Quantity of Order ${text}: ${order.quantity}`;
+    })
     .forEach(sentence => WriteLine(sentence));
 }
 
