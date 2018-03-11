@@ -72,8 +72,10 @@ function zipDemo(orders) {
   const orderNumbersInText = ["One", "Two", "Three", "Four", "Five"];
   orders
     .map(
-      (order, index) =>
-        `Quantity of Order ${orderNumbersInText[index]}: ${order.quantity}`
+      (order, index) => {
+        const text = orderNumbersInText[index];
+        return `Quantity of Order ${text}: ${order.quantity}`
+      }
     )
     .forEach(sentence => WriteLine(sentence));
 }
