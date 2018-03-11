@@ -43,4 +43,45 @@ Order ID: 3, Quantity: 30, Order Date: Tue Apr 03 2018 03:03:03 GMT-0400 (Easter
 Order ID: 2, Quantity: 20, Order Date: Fri Mar 02 2018 02:02:02 GMT-0500 (Eastern Standard Time)
 Order ID: 5, Quantity: 20, Order Date: Tue Jun 05 2018 05:05:05 GMT-0400 (Eastern Daylight Time)
 Order ID: 4, Quantity: 10, Order Date: Fri May 04 2018 04:04:04 GMT-0400 (Eastern Daylight Time)
+====================  Some (LINQ 'Any' Equivalent) DEMO - Check if there are *any* orders with certain quantities  ====================
+Are there orders with quantity great than and equal to 30? true
+Are there orders ordered before 2018? false
+Do we have more than 100 Orders? false
+====================  Filter (LINQ 'Distinct' Equivalent) DEMO - Get Distinct Order Quantities  ====================
+Distinct Quantity: 40
+Distinct Quantity: 20
+Distinct Quantity: 30
+Distinct Quantity: 10
+====================  Filter (LINQ 'Distinct' Equivalent) DEMO2 - Get Distinct Order Quantities using "Set"  ====================
+Distinct Quantity: 40
+Distinct Quantity: 20
+Distinct Quantity: 30
+Distinct Quantity: 10
+====================  Concat (LINQ 'Concat' Equivalent) DEMO - Concatenate the first and the last orders  ====================
+Order ID: 1, Quantity: 40, Order Date: Thu Feb 01 2018 01:01:01 GMT-0500 (Eastern Standard Time)
+Order ID: 5, Quantity: 20, Order Date: Tue Jun 05 2018 05:05:05 GMT-0400 (Eastern Daylight Time)
+====================  Spread Operator (LINQ 'SelectMany' Equivalent) DEMO - Concatenate the first and the last orders  ====================
+Order ID: 1, Quantity: 40, Order Date: Thu Feb 01 2018 01:01:01 GMT-0500 (Eastern Standard Time)
+Order ID: 5, Quantity: 20, Order Date: Tue Jun 05 2018 05:05:05 GMT-0400 (Eastern Daylight Time)
+====================  Reverse (LINQ 'Reverse' Equivalent) DEMO - Reverse current data source elements  ====================
+    ====================  Reversing from this list  ====================
+    Order ID: 3, Quantity: 30, Order Date: Tue Apr 03 2018 03:03:03 GMT-0400 (Eastern Daylight Time)
+    Order ID: 4, Quantity: 10, Order Date: Fri May 04 2018 04:04:04 GMT-0400 (Eastern Daylight Time)
+    Order ID: 5, Quantity: 20, Order Date: Tue Jun 05 2018 05:05:05 GMT-0400 (Eastern Daylight Time)
+    Order ID: 1, Quantity: 40, Order Date: Thu Feb 01 2018 01:01:01 GMT-0500 (Eastern Standard Time)
+    Order ID: 2, Quantity: 20, Order Date: Fri Mar 02 2018 02:02:02 GMT-0500 (Eastern Standard Time)
+Order ID: 2, Quantity: 20, Order Date: Fri Mar 02 2018 02:02:02 GMT-0500 (Eastern Standard Time)
+Order ID: 1, Quantity: 40, Order Date: Thu Feb 01 2018 01:01:01 GMT-0500 (Eastern Standard Time)
+Order ID: 5, Quantity: 20, Order Date: Tue Jun 05 2018 05:05:05 GMT-0400 (Eastern Daylight Time)
+Order ID: 4, Quantity: 10, Order Date: Fri May 04 2018 04:04:04 GMT-0400 (Eastern Daylight Time)
+Order ID: 3, Quantity: 30, Order Date: Tue Apr 03 2018 03:03:03 GMT-0400 (Eastern Daylight Time)
+====================  Map (LINQ 'Zip' Equivalent) DEMO - Appending Order Numbers in Text  ====================
+Quantity of Order One: 40
+Quantity of Order Two: 20
+Quantity of Order Three: 30
+Quantity of Order Four: 10
+Quantity of Order Five: 20
+====================  Math.min/max (LINQ 'Min/Max' Equivalent) DEMO - Appending Order Numbers in Text  ====================
+Minimum Quantity: 10
+Maximum Quantity: 40
 ```
