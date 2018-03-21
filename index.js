@@ -109,6 +109,7 @@ main = () => {
 function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
   Array.prototype.except = function(other, idSelector = obj => obj) {
     const otherSet = new Set([...other.map(idSelector)]);
+    // Reference: http://2ality.com/2015/01/es6-set-operations.html
     const difference = new Set(this.filter(object => !otherSet.has(idSelector(object))));
     return [...difference];
   };
@@ -123,6 +124,7 @@ function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
 function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
   Array.prototype.intersect = function(other, idSelector = obj => obj) {
     const otherSet = new Set([...other.map(idSelector)]);
+    // Reference: http://2ality.com/2015/01/es6-set-operations.html
     const intersection = new Set(this.filter(object => otherSet.has(idSelector(object))));
     return [...intersection];
   };
