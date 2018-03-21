@@ -90,7 +90,7 @@ main = () => {
 
   // Part 4 Demos start here.
   printHeaderFooter(
-    "Set.prototype.union (LINQ 'Union' Equivalent) DEMO - Display Domestic & International Orders",
+    "Array.prototype.union (LINQ 'Union' Equivalent) DEMO - Display Domestic & International Orders",
     () => unionDemo(domesticOrders, internationalOrders)
   );
 
@@ -106,14 +106,24 @@ main = () => {
   );
 };
 
-function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
-  Array.prototype.except = function(other, idSelector = obj => obj) {
-    const otherSet = new Set([...other.map(idSelector)]);
-    // Reference: http://2ality.com/2015/01/es6-set-operations.html
-    const difference = new Set(this.filter(object => !otherSet.has(idSelector(object))));
-    return [...difference];
-  };
+Array.prototype.union = function(other) {
+  return [...new Set([...this, ...other])];
+};
+Array.prototype.intersect = function(other, idSelector = obj => obj) {
+  const otherSet = new Set([...other.map(idSelector)]);
+  // Reference: http://2ality.com/2015/01/es6-set-operations.html
+  const intersection = new Set(this.filter(object => otherSet.has(idSelector(object))));
+  return [...intersection];
+};
+Array.prototype.except = function(other, idSelector = obj => obj) {
+  const otherSet = new Set([...other.map(idSelector)]);
+  // Reference: http://2ality.com/2015/01/es6-set-operations.html
+  const difference = new Set(this.filter(object => !otherSet.has(idSelector(object))));
+  return [...difference];
+};
 
+
+function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
   const orderIdSelector = order => order.id;
   // from "unionDemo()"
   const allOrders = [...new Set([...domesticOrders, ...internationalOrders])];
@@ -122,13 +132,6 @@ function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
 }
 
 function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
-  Array.prototype.intersect = function(other, idSelector = obj => obj) {
-    const otherSet = new Set([...other.map(idSelector)]);
-    // Reference: http://2ality.com/2015/01/es6-set-operations.html
-    const intersection = new Set(this.filter(object => otherSet.has(idSelector(object))));
-    return [...intersection];
-  };
-
   const orderIdSelector = order => order.id;
   const usOrdersOnHold = ordersOnHold.intersect(
     domesticOrders,
@@ -156,7 +159,7 @@ function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
 }
 
 function unionDemo(domesticOrders, internationalOrders) {
-  const allOrders = [...new Set([...domesticOrders, ...internationalOrders])];
+  const allOrders = domesticOrders.union(internationalOrders);
   printOrders(allOrders);
 }
 
