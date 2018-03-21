@@ -109,6 +109,10 @@ main = () => {
 Array.prototype.union = function(other) {
   return [...new Set([...this, ...other])];
 };
+// SQL has "UNION ALL" that combines two sets without dropping duplicates.
+// Array.prototype.unionAll = function(other) {
+//   return [...this, ...other];
+// };
 Array.prototype.intersect = function(other, idSelector = obj => obj) {
   const otherSet = new Set([...other.map(idSelector)]);
   // Reference: http://2ality.com/2015/01/es6-set-operations.html
@@ -160,7 +164,7 @@ function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
 
 function unionDemo(domesticOrders, internationalOrders) {
   const allOrders = domesticOrders.union(internationalOrders);
-  
+
   printOrders(allOrders);
 }
 
