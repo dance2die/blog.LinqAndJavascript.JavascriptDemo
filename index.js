@@ -8,6 +8,22 @@ const orders = [
   { id: 5, quantity: 20, orderDate: new Date(2018, 5, 5, 5, 5, 5) }
 ];
 
+const domesticOrders = [
+  { id: 1, quantity: 40, orderDate: new Date(2018, 1, 1, 1, 1, 1) },
+  { id: 11, quantity: 20, orderDate: new Date(2018, 11, 2, 2, 2, 2) },
+  { id: 111, quantity: 450, orderDate: new Date(2018, 11, 1, 2, 2, 2) },
+  { id: 1111, quantity: 230, orderDate: new Date(2018, 11, 11, 2, 2, 2) }
+];
+
+const internationalOrders = [
+  { id: 3, quantity: 30, orderDate: new Date(2018, 3, 3, 3, 3, 3) },
+  { id: 33, quantity: 300, orderDate: new Date(2018, 3, 3, 3, 3, 3) },
+  { id: 4, quantity: 10, orderDate: new Date(2018, 4, 4, 4, 4, 4) },
+  { id: 44, quantity: 100, orderDate: new Date(2018, 4, 4, 4, 4, 4) },
+  { id: 5, quantity: 20, orderDate: new Date(2018, 5, 5, 5, 5, 5) },
+  { id: 55, quantity: 200, orderDate: new Date(2018, 5, 5, 5, 5, 5) }
+];
+
 main = () => {
   printHeaderFooter(
     "Map (LINQ 'Select' Equivalent) DEMO - Print Order Quantities",
@@ -71,7 +87,29 @@ main = () => {
     "Math.min/max (LINQ 'Min/Max' Equivalent) DEMO - Appending Order Numbers in Text",
     () => minMaxDemo(orders)
   );
+
+  // Part 4 Demos start here.
+  printHeaderFooter(
+    "Set.prototype.union (LINQ 'Union' Equivalent) DEMO - Display Domestic & International Orders",
+    () => unionDemo(domesticOrders, internationalOrders)
+  );
 };
+
+function unionDemo(domestic, international) {
+  Set.prototype.union = function(setB) {
+    var union = new Set(this);
+    for (var elem of setB) {
+      union.add(elem);
+    }
+    return union;
+  };
+
+  const domesticSet = new Set(domestic);
+  const internationalSet = new Set(international);
+  const allOrders = domesticSet.union(international);
+
+  printOrders(allOrders);
+}
 
 function minMaxDemo(orders) {
   const minimumQuantity = Math.min(...orders.map(order => order.quantity));
