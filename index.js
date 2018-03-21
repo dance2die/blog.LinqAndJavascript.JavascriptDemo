@@ -125,9 +125,9 @@ Array.prototype.except = function(other, idSelector = obj => obj) {
 
 function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
   const orderIdSelector = order => order.id;
-  // from "unionDemo()"
-  const allOrders = [...new Set([...domesticOrders, ...internationalOrders])];
+  const allOrders = domesticOrders.union(internationalOrders);
   const allOrdersNotOnHold = allOrders.except(ordersOnHold, orderIdSelector);
+
   printOrders(allOrdersNotOnHold);
 }
 
@@ -160,6 +160,7 @@ function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
 
 function unionDemo(domesticOrders, internationalOrders) {
   const allOrders = domesticOrders.union(internationalOrders);
+  
   printOrders(allOrders);
 }
 
