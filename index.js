@@ -93,21 +93,57 @@ main = () => {
     "Set.prototype.union (LINQ 'Union' Equivalent) DEMO - Display Domestic & International Orders",
     () => unionDemo(domesticOrders, internationalOrders)
   );
+
+  const ordersOnHold = orders;
+  printHeaderFooter(
+    "Array.prototype.intersect (LINQ 'Intersect' Equivalent) DEMO - Find All Orders on Hold",
+    () => intersectDemo(ordersOnHold, domesticOrders, internationalOrders)
+  );
 };
 
-function unionDemo(domestic, international) {
-  Set.prototype.union = function(setB) {
-    var union = new Set(this);
-    for (var elem of setB) {
-      union.add(elem);
-    }
-    return union;
+function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
+  Array.prototype.intersect = function(other, idSelector) {
+    const thisSet = new Set([...this.map(idSelector)]);
+    const otherSet = new Set([...other.map(idSelector)]);
+
+    const intersection = new Set();
+    otherSet.forEach((id, id2, set) => {
+      if (thisSet.has(id)) {
+        intersection.add(this.find(element => idSelector(element) == id));
+      }
+    });
+
+    return [...intersection];
   };
 
-  const domesticSet = new Set(domestic);
-  const internationalSet = new Set(international);
-  const allOrders = domesticSet.union(international);
+  const orderIdSelector = order => order.id;
+  const usOrdersOnHold = ordersOnHold.intersect(
+    domesticOrders,
+    orderIdSelector
+  );
+  const internationalOrdersOnHold = ordersOnHold.intersect(
+    internationalOrders,
+    orderIdSelector
+  );
 
+  const indentBy = 4;
+  const dividerCharacter = "*";
+  printHeaderFooter(
+    "US Orders on hold",
+    () => printOrders(usOrdersOnHold, indentBy),
+    indentBy,
+    dividerCharacter
+  );
+  printHeaderFooter(
+    "International Orders on hold",
+    () => printOrders(internationalOrdersOnHold, indentBy),
+    indentBy,
+    dividerCharacter
+  );
+}
+
+function unionDemo(domesticOrders, internationalOrders) {
+  const allOrders = [...new Set([...domesticOrders, ...internationalOrders])];
   printOrders(allOrders);
 }
 
@@ -267,7 +303,7 @@ function printHeaderFooter(
   indentBy = 0,
   dividerCharacter = "="
 ) {
-  const divider = "=".repeat(20);
+  const divider = dividerCharacter.repeat(20);
   const indentation = " ".repeat(indentBy);
   WriteLine(`${indentation}${divider}  ${title}  ${divider}`);
   callback();
