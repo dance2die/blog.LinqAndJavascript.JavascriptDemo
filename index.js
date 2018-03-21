@@ -101,22 +101,44 @@ main = () => {
   );
 
   printHeaderFooter(
-    "Array.prototype.intersect (LINQ 'Except' Equivalent) DEMO - Get all orders NOT on hold",
+    "Array.prototype.except (LINQ 'Except' Equivalent) DEMO - Get all orders NOT on hold",
     () => exceptDemo(ordersOnHold, domesticOrders, internationalOrders)
   );
 };
 
-function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {}
-
-function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
-  Array.prototype.intersect = function(other, idSelector = (obj) => obj) {
+function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
+  Array.prototype.except = function(other, idSelector = obj => obj) {
     const thisSet = new Set([...this.map(idSelector)]);
     const otherSet = new Set([...other.map(idSelector)]);
     const thisArray = [...thisSet];
-    // const intersection = thisArray.filter(thisValue => otherSet.has(thisValue));
+
     return thisArray.reduce((intersection, thisValue) => {
-      if (otherSet.has(thisValue)) 
-        intersection.push(this.find(object => idSelector(object) === thisValue));
+      if (!otherSet.has(thisValue))
+        intersection.push(
+          this.find(object => idSelector(object) === thisValue)
+        );
+      return intersection;
+    }, []);
+  };
+
+  const orderIdSelector = order => order.id;
+  // from "unionDemo()"
+  const allOrders = [...new Set([...domesticOrders, ...internationalOrders])];
+  const allOrdersNotOnHold = allOrders.except(ordersOnHold, orderIdSelector);
+  printOrders(allOrdersNotOnHold);
+}
+
+function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
+  Array.prototype.intersect = function(other, idSelector = obj => obj) {
+    const thisSet = new Set([...this.map(idSelector)]);
+    const otherSet = new Set([...other.map(idSelector)]);
+    const thisArray = [...thisSet];
+
+    return thisArray.reduce((intersection, thisValue) => {
+      if (otherSet.has(thisValue))
+        intersection.push(
+          this.find(object => idSelector(object) === thisValue)
+        );
       return intersection;
     }, []);
   };
