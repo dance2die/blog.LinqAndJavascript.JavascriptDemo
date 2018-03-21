@@ -99,21 +99,26 @@ main = () => {
     "Array.prototype.intersect (LINQ 'Intersect' Equivalent) DEMO - Find All Orders on Hold",
     () => intersectDemo(ordersOnHold, domesticOrders, internationalOrders)
   );
+
+  printHeaderFooter(
+    "Array.prototype.intersect (LINQ 'Except' Equivalent) DEMO - Get all orders NOT on hold",
+    () => exceptDemo(ordersOnHold, domesticOrders, internationalOrders)
+  );
 };
 
+function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {}
+
 function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
-  Array.prototype.intersect = function(other, idSelector) {
+  Array.prototype.intersect = function(other, idSelector = (obj) => obj) {
     const thisSet = new Set([...this.map(idSelector)]);
     const otherSet = new Set([...other.map(idSelector)]);
-
-    const intersection = new Set();
-    otherSet.forEach((id, id2, set) => {
-      if (thisSet.has(id)) {
-        intersection.add(this.find(element => idSelector(element) == id));
-      }
-    });
-
-    return [...intersection];
+    const thisArray = [...thisSet];
+    // const intersection = thisArray.filter(thisValue => otherSet.has(thisValue));
+    return thisArray.reduce((intersection, thisValue) => {
+      if (otherSet.has(thisValue)) 
+        intersection.push(this.find(object => idSelector(object) === thisValue));
+      return intersection;
+    }, []);
   };
 
   const orderIdSelector = order => order.id;
