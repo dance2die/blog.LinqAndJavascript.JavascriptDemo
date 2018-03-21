@@ -108,17 +108,9 @@ main = () => {
 
 function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
   Array.prototype.except = function(other, idSelector = obj => obj) {
-    const thisSet = new Set([...this.map(idSelector)]);
     const otherSet = new Set([...other.map(idSelector)]);
-    const thisArray = [...thisSet];
-
-    return thisArray.reduce((intersection, thisValue) => {
-      if (!otherSet.has(thisValue))
-        intersection.push(
-          this.find(object => idSelector(object) === thisValue)
-        );
-      return intersection;
-    }, []);
+    const difference = new Set(this.filter(object => !otherSet.has(idSelector(object))));
+    return [...difference];
   };
 
   const orderIdSelector = order => order.id;
@@ -130,17 +122,9 @@ function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
 
 function intersectDemo(ordersOnHold, domesticOrders, internationalOrders) {
   Array.prototype.intersect = function(other, idSelector = obj => obj) {
-    const thisSet = new Set([...this.map(idSelector)]);
     const otherSet = new Set([...other.map(idSelector)]);
-    const thisArray = [...thisSet];
-
-    return thisArray.reduce((intersection, thisValue) => {
-      if (otherSet.has(thisValue))
-        intersection.push(
-          this.find(object => idSelector(object) === thisValue)
-        );
-      return intersection;
-    }, []);
+    const intersection = new Set(this.filter(object => otherSet.has(idSelector(object))));
+    return [...intersection];
   };
 
   const orderIdSelector = order => order.id;
