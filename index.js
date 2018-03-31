@@ -104,7 +104,23 @@ main = () => {
     "Array.prototype.except (LINQ 'Except' Equivalent) DEMO - Get all orders NOT on hold",
     () => exceptDemo(ordersOnHold, domesticOrders, internationalOrders)
   );
+
+  // Part 5 Demos start here.
+  printHeaderFooter(
+    "Reduce (LINQ 'Sum' Equivalent) DEMO - Sum All Quantities",
+    () => sumDemo(orders)
+  );
 };
+
+// This is exactly the same code as "reduceDemo"
+function sumDemo(orders) {
+  const initialQuantity = 0;
+  const totalQuantities = orders.reduce(
+    (sum, order) => sum + order.quantity,
+    initialQuantity
+  );
+  console.log(`sumDemo - Total Quantities: ${totalQuantities}`);
+}
 
 Array.prototype.union = function(other) {
   return [...new Set([...this, ...other])];
@@ -116,16 +132,19 @@ Array.prototype.union = function(other) {
 Array.prototype.intersect = function(other, idSelector = obj => obj) {
   const otherSet = new Set([...other.map(idSelector)]);
   // Reference: http://2ality.com/2015/01/es6-set-operations.html
-  const intersection = new Set(this.filter(object => otherSet.has(idSelector(object))));
+  const intersection = new Set(
+    this.filter(object => otherSet.has(idSelector(object)))
+  );
   return [...intersection];
 };
 Array.prototype.except = function(other, idSelector = obj => obj) {
   const otherSet = new Set([...other.map(idSelector)]);
   // Reference: http://2ality.com/2015/01/es6-set-operations.html
-  const difference = new Set(this.filter(object => !otherSet.has(idSelector(object))));
+  const difference = new Set(
+    this.filter(object => !otherSet.has(idSelector(object)))
+  );
   return [...difference];
 };
-
 
 function exceptDemo(ordersOnHold, domesticOrders, internationalOrders) {
   const orderIdSelector = order => order.id;
