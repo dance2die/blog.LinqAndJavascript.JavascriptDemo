@@ -110,20 +110,34 @@ main = () => {
     "Reduce (LINQ 'Sum' Equivalent) DEMO - Sum All Quantities",
     () => sumDemo(orders)
   );
-  // printHeaderFooter(
-  //   "Reduce (LINQ 'Average' Equivalent) DEMO - Average Quantity",
-  //   () => averageDemo(orders)
-  // );
+  printHeaderFooter(
+    "Reduce (LINQ 'Average' Equivalent) DEMO - Average Quantity",
+    () => averageDemo(orders)
+  );
 };
 
 Array.prototype.sum = function(propertySelector = obj => obj) {
   // This is same code in "reduceDemo"
-  const initialQuantity = 0;
-  return this.reduce(
-    (sum, obj) => sum + propertySelector(obj),
-    initialQuantity
+  const intialValue = 0;
+  return this.reduce((sum, obj) => sum + propertySelector(obj), intialValue);
+};
+
+Array.prototype.average = function(propertySelector = obj => obj) {
+  const intialValue = 0;
+  return (
+    this.reduce((sum, obj) => sum + propertySelector(obj), intialValue) /
+    this.length
   );
 };
+
+function averageDemo(orders) {
+  var averageQuantity = orders.average(order => order.quantity);
+  var totalQuantities = orders.sum(order => order.quantity);
+  var count = orders.length;
+  WriteLine(
+    `Average Quantity: ${totalQuantities} / ${count} = ${averageQuantity}`
+  );
+}
 
 function sumDemo(orders) {
   const totalQuantities = orders.sum(order => order.quantity);
