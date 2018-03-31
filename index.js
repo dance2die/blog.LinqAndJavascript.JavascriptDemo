@@ -114,6 +114,10 @@ main = () => {
     "Reduce (LINQ 'Average' Equivalent) DEMO - Average Quantity",
     () => averageDemo(orders)
   );
+  printHeaderFooter(
+    "Filter (LINQ 'Count' Equivalent) DEMO - Count Orders Placed On and After March",
+    () => countDemo(orders)
+  );
 };
 
 Array.prototype.sum = function(propertySelector = obj => obj) {
@@ -129,6 +133,24 @@ Array.prototype.average = function(propertySelector = obj => obj) {
     this.length
   );
 };
+
+Array.prototype.count = function(predicate = obj => true) {
+  return this.filter(predicate).length;
+};
+
+function countDemo(orders) {
+  const march = new Date(2018, 3, 1);
+  const ordersOnAndAfterMarch = orders.filter(
+    order => order.orderDate >= march
+  );
+  printOrders(ordersOnAndAfterMarch, (indentBy = 4));
+  const orderCountPlacedOnAndAfterMarch = orders.count(
+    order => order.orderDate >= march
+  );
+  WriteLine(
+    `Total Orders Placed On and After March: ${orderCountPlacedOnAndAfterMarch}`
+  );
+}
 
 function averageDemo(orders) {
   var averageQuantity = orders.average(order => order.quantity);
