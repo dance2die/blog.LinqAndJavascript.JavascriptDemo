@@ -111,4 +111,13 @@ Order ID: 1111, Quantity: 230, Order Date: Tue Dec 11 2018 02:02:02 GMT-0500 (Ea
 Order ID: 33, Quantity: 300, Order Date: Tue Apr 03 2018 03:03:03 GMT-0400 (Eastern Daylight Time)
 Order ID: 44, Quantity: 100, Order Date: Fri May 04 2018 04:04:04 GMT-0400 (Eastern Daylight Time)
 Order ID: 55, Quantity: 200, Order Date: Tue Jun 05 2018 05:05:05 GMT-0400 (Eastern Daylight Time)
+====================  Reduce (LINQ 'Sum' Equivalent) DEMO - Sum All Quantities  ====================
+sumDemo - Total Quantities: 120
+====================  Reduce (LINQ 'Average' Equivalent) DEMO - Average Quantity  ====================
+Average Quantity: 120 / 5 = 24
+====================  Filter (LINQ 'Count' Equivalent) DEMO - Count Orders Placed On and After March  ====================
+    Order ID: 3, Quantity: 30, Order Date: Tue Apr 03 2018 03:03:03 GMT-0400 (Eastern Daylight Time)
+    Order ID: 4, Quantity: 10, Order Date: Fri May 04 2018 04:04:04 GMT-0400 (Eastern Daylight Time)
+    Order ID: 5, Quantity: 20, Order Date: Tue Jun 05 2018 05:05:05 GMT-0400 (Eastern Daylight Time)
+Total Orders Placed On and After March: 3
 ```
