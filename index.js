@@ -110,15 +110,23 @@ main = () => {
     "Reduce (LINQ 'Sum' Equivalent) DEMO - Sum All Quantities",
     () => sumDemo(orders)
   );
+  // printHeaderFooter(
+  //   "Reduce (LINQ 'Average' Equivalent) DEMO - Average Quantity",
+  //   () => averageDemo(orders)
+  // );
 };
 
-// This is exactly the same code as "reduceDemo"
-function sumDemo(orders) {
+Array.prototype.sum = function(propertySelector = obj => obj) {
+  // This is same code in "reduceDemo"
   const initialQuantity = 0;
-  const totalQuantities = orders.reduce(
-    (sum, order) => sum + order.quantity,
+  return this.reduce(
+    (sum, obj) => sum + propertySelector(obj),
     initialQuantity
   );
+};
+
+function sumDemo(orders) {
+  const totalQuantities = orders.sum(order => order.quantity);
   console.log(`sumDemo - Total Quantities: ${totalQuantities}`);
 }
 
