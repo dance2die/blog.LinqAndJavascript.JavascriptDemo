@@ -118,7 +118,46 @@ main = () => {
     "Filter (LINQ 'Count' Equivalent) DEMO - Count Orders Placed On and After March",
     () => countDemo(orders)
   );
+
+  // Part 6 Demos start here.
+  printHeaderFooter(
+    "Filter (LINQ 'First/FirstOrDefault' Equivalent) DEMO - Get First Order",
+    () => firstDemo(orders)
+  );
 };
+
+const indentBy = 4;
+const march = new Date(2018, 3, 1);
+const september = new Date(2018, 9, 1);
+
+Array.prototype.first = function(propertySelector = obj => obj) {
+  return this.filter(propertySelector)[0];
+};
+
+Array.prototype.firstOrDefault = function(
+  propertySelector = obj => obj,
+  defaultValue = undefined
+) {
+  return this.filter(propertySelector)[0] || defaultValue;
+};
+
+function firstDemo(orders) {
+  var firstOrderAfterMarch = orders.first(order => order.orderDate >= march);
+  printHeaderFooter(
+    "First order after March",
+    () => printOrder(firstOrderAfterMarch, indentBy),
+    indentBy
+  );
+
+  var firstOrderAfterSeptember = orders.firstOrDefault(
+    order => order.orderDate >= september
+  );
+  printHeaderFooter(
+    "First or Default order after September",
+    () => printOrder(firstOrderAfterSeptember, indentBy),
+    indentBy
+  );
+}
 
 Array.prototype.sum = function(propertySelector = obj => obj) {
   // This is same code in "reduceDemo"
@@ -139,11 +178,10 @@ Array.prototype.count = function(predicate = obj => true) {
 };
 
 function countDemo(orders) {
-  const march = new Date(2018, 3, 1);
   const ordersOnAndAfterMarch = orders.filter(
     order => order.orderDate >= march
   );
-  printOrders(ordersOnAndAfterMarch, (indentBy = 4));
+  printOrders(ordersOnAndAfterMarch, indentBy);
   const orderCountPlacedOnAndAfterMarch = orders.count(
     order => order.orderDate >= march
   );
@@ -394,13 +432,20 @@ function printHeaderFooter(
 }
 
 function printOrders(orders, indentBy = 0) {
-  orders.forEach(order => {
+  orders.forEach(order => printOrder(order, indentBy));
+}
+
+function printOrder(order, indentBy = 0) {
+  const indentation = " ".repeat(indentBy);
+
+  if (order) {
     const { id, quantity, orderDate } = order;
-    const indentation = " ".repeat(indentBy);
     WriteLine(
       `${indentation}Order ID: ${id}, Quantity: ${quantity}, Order Date: ${orderDate}`
     );
-  });
+  } else {
+    WriteLine(`${indentation}<NULL>`);
+  }
 }
 
 main();
