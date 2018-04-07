@@ -124,37 +124,39 @@ main = () => {
     "Filter (LINQ 'First/FirstOrDefault' Equivalent) DEMO - Get First Order",
     () => firstDemo(orders)
   );
+  printHeaderFooter(
+    "Filter (LINQ 'Last/LastOrDefault' Equivalent) DEMO - Get Last Order",
+    () => lastDemo(orders)
+  );
 };
 
 const indentBy = 4;
 const march = new Date(2018, 3, 1);
 const september = new Date(2018, 9, 1);
 
+Array.prototype.last = function(propertySelector = obj => obj) {
+  const filtered = this.filter(propertySelector);
+  return filtered[filtered.length - 1];
+};
+
+function lastDemo(orders) {
+  const lastOrderAfterMarch = orders.last(order => order.orderDate >= march);
+  printHeaderFooter(
+    "Last order after March",
+    () => printOrder(lastOrderAfterMarch, indentBy),
+    indentBy
+  );
+}
+
 Array.prototype.first = function(propertySelector = obj => obj) {
   return this.filter(propertySelector)[0];
 };
 
-Array.prototype.firstOrDefault = function(
-  propertySelector = obj => obj,
-  defaultValue = undefined
-) {
-  return this.filter(propertySelector)[0] || defaultValue;
-};
-
 function firstDemo(orders) {
-  var firstOrderAfterMarch = orders.first(order => order.orderDate >= march);
+  const firstOrderAfterMarch = orders.first(order => order.orderDate >= march);
   printHeaderFooter(
     "First order after March",
     () => printOrder(firstOrderAfterMarch, indentBy),
-    indentBy
-  );
-
-  var firstOrderAfterSeptember = orders.firstOrDefault(
-    order => order.orderDate >= september
-  );
-  printHeaderFooter(
-    "First or Default order after September",
-    () => printOrder(firstOrderAfterSeptember, indentBy),
     indentBy
   );
 }
