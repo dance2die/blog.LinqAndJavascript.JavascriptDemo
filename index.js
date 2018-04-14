@@ -146,6 +146,14 @@ function lastDemo(orders) {
     () => printOrder(lastOrderAfterMarch, indentBy),
     indentBy
   );
+
+  const lastOrderAfterSeptember =
+    orders.last(order => order.orderDate >= september) || null;
+  printHeaderFooter(
+    "Last or Default order after September",
+    () => printOrder(lastOrderAfterSeptember, indentBy),
+    indentBy
+  );
 }
 
 Array.prototype.first = function(propertySelector = obj => obj) {
