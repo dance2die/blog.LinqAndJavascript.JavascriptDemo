@@ -144,7 +144,33 @@ main = () => {
   printHeaderFooter("Skip/SkipWhile DEMO - Skip Orders", () =>
     skipDemo(orders)
   );
+  printHeaderFooter("Take/TakeWhile DEMO - Take Orders", () =>
+    takeDemo(orders)
+  );
 };
+
+Array.prototype.take = function(count) {
+  return this.filter((_, i) => i < count);
+};
+Array.prototype.takeWhile = function(predicate) {
+  return this.filter((_, i) => predicate(_, i));
+};
+
+function takeDemo(orders) {
+  const firstTwoOrders1 = orders.take(2);
+  printHeaderFooter(
+    "First Two Orders - Take",
+    () => printOrders(firstTwoOrders1, indentBy),
+    indentBy
+  );
+
+  const firstTwoOrders2 = orders.takeWhile((order, index) => index <= 1);
+  printHeaderFooter(
+    "First Two Orders - TakeWhile",
+    () => printOrders(firstTwoOrders2, indentBy),
+    indentBy
+  );
+}
 
 Array.prototype.skip = function(count) {
   return this.filter((_, i) => i >= count);
