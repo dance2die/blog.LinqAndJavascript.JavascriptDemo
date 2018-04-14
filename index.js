@@ -159,6 +159,14 @@ function firstDemo(orders) {
     () => printOrder(firstOrderAfterMarch, indentBy),
     indentBy
   );
+
+  const firstOrderAfterSeptember =
+    orders.first(order => order.OrderDate >= september) || null;
+  printHeaderFooter(
+    "First or Default order after September",
+    () => printOrder(firstOrderAfterSeptember, indentBy),
+    indentBy
+  );
 }
 
 Array.prototype.sum = function(propertySelector = obj => obj) {
