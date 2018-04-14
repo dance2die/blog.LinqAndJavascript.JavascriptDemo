@@ -1,5 +1,15 @@
 const WriteLine = console.log;
 
+const indentBy = 4;
+const march = new Date(2018, 3, 1);
+const september = new Date(2018, 9, 1);
+
+const nullOrder = {
+  id: -1,
+  quantity: 0,
+  orderDate: new Date(-8640000000000000)
+};
+
 const orders = [
   { id: 1, quantity: 40, orderDate: new Date(2018, 1, 1, 1, 1, 1) },
   { id: 2, quantity: 20, orderDate: new Date(2018, 2, 2, 2, 2, 2) },
@@ -128,11 +138,17 @@ main = () => {
     "Filter (LINQ 'Last/LastOrDefault' Equivalent) DEMO - Get Last Order",
     () => lastDemo(orders)
   );
+  printHeaderFooter("DefaultIfEmpty DEMO - Get Order or Default if Empty", () =>
+    defaultIfEmptyDemo(orders)
+  );
 };
 
-const indentBy = 4;
-const march = new Date(2018, 3, 1);
-const september = new Date(2018, 9, 1);
+function defaultIfEmptyDemo(orders) {
+  const filteredOrders = orders.filter(order => order.OrderDate >= september);
+  const ordersAfterSeptember =
+    filteredOrders.length === 0 ? [nullOrder] : filteredOrders;
+  printOrders(ordersAfterSeptember);
+}
 
 Array.prototype.last = function(propertySelector = obj => obj) {
   const filtered = this.filter(propertySelector);
