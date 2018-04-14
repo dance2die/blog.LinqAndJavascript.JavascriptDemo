@@ -217,8 +217,9 @@ function lastDemo(orders) {
     indentBy
   );
 
-  const lastOrderAfterSeptember =
-    orders.last(order => order.orderDate >= september) || null;
+  const lastOrderAfterSeptember = orders.last(
+    order => order.orderDate >= september
+  );
   printHeaderFooter(
     "Last or Default order after September",
     () => printOrder(lastOrderAfterSeptember, indentBy),
@@ -238,8 +239,9 @@ function firstDemo(orders) {
     indentBy
   );
 
-  const firstOrderAfterSeptember =
-    orders.first(order => order.OrderDate >= september) || null;
+  const firstOrderAfterSeptember = orders.first(
+    order => order.OrderDate >= september
+  );
   printHeaderFooter(
     "First or Default order after September",
     () => printOrder(firstOrderAfterSeptember, indentBy),
