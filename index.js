@@ -141,7 +141,35 @@ main = () => {
   printHeaderFooter("DefaultIfEmpty DEMO - Get Order or Default if Empty", () =>
     defaultIfEmptyDemo(orders)
   );
+  printHeaderFooter("Skip/SkipWhile DEMO - Skip Orders", () =>
+    skipDemo(orders)
+  );
 };
+
+Array.prototype.skip = function(count) {
+  return this.filter((_, i) => i >= count);
+};
+Array.prototype.skipWhile = function(predicate) {
+  return this.filter((_, i) => !predicate(_, i));
+};
+
+function skipDemo(orders) {
+  const lastTwoOrders1 = orders.skip(orders.length - 2);
+  printHeaderFooter(
+    "Last Two Orders - Skip",
+    () => printOrders(lastTwoOrders1, indentBy),
+    indentBy
+  );
+
+  const lastTwoOrders2 = orders.skipWhile(
+    (order, index) => index < orders.length - 2
+  );
+  printHeaderFooter(
+    "Last Two Orders - SkipWhile",
+    () => printOrders(lastTwoOrders2, indentBy),
+    indentBy
+  );
+}
 
 function defaultIfEmptyDemo(orders) {
   const filteredOrders = orders.filter(order => order.OrderDate >= september);
