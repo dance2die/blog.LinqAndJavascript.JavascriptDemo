@@ -152,7 +152,15 @@ main = () => {
   printHeaderFooter("Empty DEMO - Get an Empty Order Sequence", () =>
     emptyDemo()
   );
+  printHeaderFooter("Repeat DEMO - Repeat Texts", () => repeatDemo());
 };
+
+function repeatDemo() {
+  const texts = Array(5)
+    .fill()
+    .map(_ => "I love your smile");
+  texts.map(text => WriteLine(text));
+}
 
 function emptyDemo() {
   const emptyOrders = [];
