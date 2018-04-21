@@ -147,7 +147,41 @@ main = () => {
   printHeaderFooter("Take/TakeWhile DEMO - Take Orders", () =>
     takeDemo(orders)
   );
+
+  // Part 7 Demos start here.
+  printHeaderFooter("Empty DEMO - Get an Empty Order Sequence", () =>
+    emptyDemo()
+  );
+  printHeaderFooter("Repeat DEMO - Repeat Texts", () => repeatDemo());
+  printHeaderFooter("Range DEMO - Some Generic Examples", () => rangeDemo());
 };
+
+function rangeDemo() {
+  const oneToTen = Array(10)
+    .fill()
+    .map((_, i) => i + 1);
+  WriteLine(`One to Ten => ${oneToTen.join(",")}`);
+  const randomRange = Array(3)
+    .fill()
+    .map((_, i) => i + 999);
+  WriteLine(`Three numbers from 999 => ${randomRange.join(",")}`);
+}
+
+function repeatDemo() {
+  const texts = Array(5)
+    .fill()
+    .map(_ => "I love your smile");
+  texts.map(text => WriteLine(text));
+}
+
+function emptyDemo() {
+  const emptyOrders = [];
+  printHeaderFooter(
+    "This prints no order since the sequence is empty",
+    () => printOrders(emptyOrders),
+    indentBy
+  );
+}
 
 Array.prototype.take = function(count) {
   return this.filter((_, i) => i < count);
