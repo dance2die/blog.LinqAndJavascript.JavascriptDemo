@@ -147,7 +147,21 @@ main = () => {
   printHeaderFooter("Take/TakeWhile DEMO - Take Orders", () =>
     takeDemo(orders)
   );
+
+  // Part 7 Demos start here.
+  printHeaderFooter("Empty DEMO - Get an Empty Order Sequence", () =>
+    emptyDemo()
+  );
 };
+
+function emptyDemo() {
+  const emptyOrders = [];
+  printHeaderFooter(
+    "This prints no order since the sequence is empty",
+    () => printOrders(emptyOrders),
+    indentBy
+  );
+}
 
 Array.prototype.take = function(count) {
   return this.filter((_, i) => i < count);
