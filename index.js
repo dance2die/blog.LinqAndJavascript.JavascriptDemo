@@ -153,7 +153,19 @@ main = () => {
     emptyDemo()
   );
   printHeaderFooter("Repeat DEMO - Repeat Texts", () => repeatDemo());
+  printHeaderFooter("Range DEMO - Some Generic Examples", () => rangeDemo());
 };
+
+function rangeDemo() {
+  const oneToTen = Array(10)
+    .fill()
+    .map((_, i) => i + 1);
+  WriteLine(`One to Ten => ${oneToTen.join(",")}`);
+  const randomRange = Array(3)
+    .fill()
+    .map((_, i) => i + 999);
+  WriteLine(`Three numbers from 999 => ${randomRange.join(",")}`);
+}
 
 function repeatDemo() {
   const texts = Array(5)
