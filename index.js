@@ -185,15 +185,8 @@ function containsDemo(shippedOrders, domesticOrders) {
   const firstDomesticOrder = domesticOrders[0];
   const equalityComparer = order => order.id === firstDomesticOrder.id;
   const containsDomesticOrder = shippedOrders.some(equalityComparer);
-  const containsDomesticOrder2 = shippedOrders.find(equalityComparer);
 
-  WriteLine(
-    `Using "some" - Is the first domestic order shipped? ${containsDomesticOrder}`
-  );
-  WriteLine(
-    `Using "find" - Is the first domestic order shipped? ${containsDomesticOrder2 !==
-      null}`
-  );
+  WriteLine(`Is the first domestic order shipped? ${containsDomesticOrder}`);
 }
 
 function allDemo(orders) {
