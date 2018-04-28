@@ -159,7 +159,26 @@ main = () => {
   printHeaderFooter("All DEMO - Check If All Orders Match a Condition", () =>
     allDemo(orders)
   );
+  printHeaderFooter(
+    "Contains DEMO - Do Shipped Orders Contain a Domestic Order?",
+    () => containsDemo(orders, domesticOrders)
+  );
 };
+
+function containsDemo(shippedOrders, domesticOrders) {
+  const firstDomesticOrder = domesticOrders[0];
+  const equalityComparer = order => order.id === firstDomesticOrder.id;
+  const containsDomesticOrder = shippedOrders.some(equalityComparer);
+  const containsDomesticOrder2 = shippedOrders.find(equalityComparer);
+
+  WriteLine(
+    `Using "some" - Is the first domestic order shipped? ${containsDomesticOrder}`
+  );
+  WriteLine(
+    `Using "find" - Is the first domestic order shipped? ${containsDomesticOrder2 !==
+      null}`
+  );
+}
 
 function allDemo(orders) {
   const areAllOrdersPlacedOn2018 = orders.every(
