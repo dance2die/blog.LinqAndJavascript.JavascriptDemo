@@ -163,7 +163,23 @@ main = () => {
     "Contains DEMO - Do Shipped Orders Contain a Domestic Order?",
     () => containsDemo(orders, domesticOrders)
   );
+  printHeaderFooter(
+    "SequenceEqual DEMO - Check If Two Sequences Are The Same",
+    () => sequenceEqualDemo(orders, domesticOrders)
+  );
 };
+
+function sequenceEqualDemo(shippedOrders, domesticOrders) {
+  const sameOrderAreSame = shippedOrders.every(
+    (order, i) => order.id === shippedOrders[i].id
+  );
+  WriteLine(`Same Orders share the same sequence ${sameOrderAreSame}`);
+
+  const areAllDomesticOrdersShipped = shippedOrders.every(
+    (order, i) => order.id === domesticOrders[i].id
+  );
+  WriteLine(`Are All Domestic Order Shipped? ${areAllDomesticOrdersShipped}`);
+}
 
 function containsDemo(shippedOrders, domesticOrders) {
   const firstDomesticOrder = domesticOrders[0];
