@@ -154,7 +154,19 @@ main = () => {
   );
   printHeaderFooter("Repeat DEMO - Repeat Texts", () => repeatDemo());
   printHeaderFooter("Range DEMO - Some Generic Examples", () => rangeDemo());
+
+  // Part 8 Demos start here.
+  printHeaderFooter("All DEMO - Check If All Orders Match a Condition", () =>
+    allDemo(orders)
+  );
 };
+
+function allDemo(orders) {
+  const areAllOrdersPlacedOn2018 = orders.every(
+    order => order.orderDate.getFullYear() === 2018
+  );
+  WriteLine(`Are All Orders Placed On 2018?: ${areAllOrdersPlacedOn2018}`);
+}
 
 function rangeDemo() {
   const oneToTen = Array(10)
