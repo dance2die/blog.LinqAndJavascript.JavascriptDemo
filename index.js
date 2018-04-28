@@ -154,7 +154,54 @@ main = () => {
   );
   printHeaderFooter("Repeat DEMO - Repeat Texts", () => repeatDemo());
   printHeaderFooter("Range DEMO - Some Generic Examples", () => rangeDemo());
+
+  // Part 8 Demos start here.
+  printHeaderFooter("All DEMO - Check If All Orders Match a Condition", () =>
+    allDemo(orders)
+  );
+  printHeaderFooter(
+    "Contains DEMO - Do Shipped Orders Contain a Domestic Order?",
+    () => containsDemo(orders, domesticOrders)
+  );
+  printHeaderFooter(
+    "SequenceEqual DEMO - Check If Two Sequences Are The Same",
+    () => sequenceEqualDemo(orders, domesticOrders)
+  );
 };
+
+function sequenceEqualDemo(shippedOrders, domesticOrders) {
+  const sameOrderAreSame = shippedOrders.every(
+    (order, i) => order.id === shippedOrders[i].id
+  );
+  WriteLine(`Same Orders share the same sequence ${sameOrderAreSame}`);
+
+  const areAllDomesticOrdersShipped = shippedOrders.every(
+    (order, i) => order.id === domesticOrders[i].id
+  );
+  WriteLine(`Are All Domestic Order Shipped? ${areAllDomesticOrdersShipped}`);
+}
+
+function containsDemo(shippedOrders, domesticOrders) {
+  const firstDomesticOrder = domesticOrders[0];
+  const equalityComparer = order => order.id === firstDomesticOrder.id;
+  const containsDomesticOrder = shippedOrders.some(equalityComparer);
+  const containsDomesticOrder2 = shippedOrders.find(equalityComparer);
+
+  WriteLine(
+    `Using "some" - Is the first domestic order shipped? ${containsDomesticOrder}`
+  );
+  WriteLine(
+    `Using "find" - Is the first domestic order shipped? ${containsDomesticOrder2 !==
+      null}`
+  );
+}
+
+function allDemo(orders) {
+  const areAllOrdersPlacedOn2018 = orders.every(
+    order => order.orderDate.getFullYear() === 2018
+  );
+  WriteLine(`Are All Orders Placed On 2018?: ${areAllOrdersPlacedOn2018}`);
+}
 
 function rangeDemo() {
   const oneToTen = Array(10)
